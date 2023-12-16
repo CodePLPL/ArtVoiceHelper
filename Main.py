@@ -88,5 +88,3 @@ while True:
 # Очистка лишних данных     
 if os.path.exists('hello.mp3'):
     os.remove('hello.mp3')
-
-# test комент
