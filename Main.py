@@ -5,6 +5,7 @@ import json ##Импортируемые библиотеки
 import webbrowser
 import datetime
 import requests
+import openai
 from gtts import gTTS
 from pydub.playback import play
 from pydub import AudioSegment
@@ -12,6 +13,10 @@ from datetime import datetime
 
 r = sr.Recognizer() ## Подключение обработчика
 mic = sr.Microphone() ## Подключение микрофона
+
+openai.api_key = "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" # Ввод ключа OpenAI
+model_engine = "text-davinci-003"
+max_tokens = 128
 
 sr.LANGUAGE = 'ru-RU' ## Язык обработки
 
