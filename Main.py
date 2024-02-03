@@ -25,6 +25,7 @@ if os.path.exists('data.json'):
         data = json.load(read_file)
 else:
     with open("data.json", "w") as write_file:
+        print("Введите ваш ключ Api OpenAI:")
         api_key = input()
         data = dict({'ApiKey' : api_key})
         json.dump(data, write_file)
