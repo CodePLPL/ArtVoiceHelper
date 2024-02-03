@@ -14,7 +14,7 @@ from datetime import datetime
 r = sr.Recognizer() ## Подключение обработчика
 mic = sr.Microphone() ## Подключение микрофона
 
-openai.api_key = "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" # Ввод ключа OpenAI
+openai.api_key = "" # Ввод ключа OpenAI
 model_engine = "text-davinci-003"
 max_tokens = 128
 
@@ -39,35 +39,9 @@ HelloA = AudioSegment.from_mp3('hello.mp3')
 play(HelloA)
 Recs = AudioSegment.from_mp3('RecS.mp3')
 
-
-
-"""
-while True:
-    if keyboard.is_pressed('left alt'):
-        with mic as source:
-            r.adjust_for_ambient_noise(source)
-            print("Запись Пошла")
-            audio = r.listen(source)
-        text = r.recognize_google(audio, language='ru-RU')
-        print(text)
-        if text == "остановка":
-            break
-        elif text == "Открой проводник":
-            os.system("explorer.exe")      
-        else:
-            print("К сожалению я не понял вас")
-            continue
-"""
-
 while True:
     try:
-        with mic as source:
-                r.adjust_for_ambient_noise(source)
-                print("∏")
-                audio = r.listen(source)
-        voicename = r.recognize_google(audio, language='ru-RU')
-        print(voicename)
-        if voicename == "Привет арт":
+        if keyboard.is_pressed('left alt'):
             with mic as source:
                 r.adjust_for_ambient_noise(source)
                 play(Recs)
