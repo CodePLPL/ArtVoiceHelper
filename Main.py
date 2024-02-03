@@ -25,11 +25,8 @@ if os.path.exists('data.json'):
         data = json.load(read_file)
 else:
     with open("data.json", "w") as write_file:
-        print("Введите своё имя")
-        name = input()
-        print("Введите свою фамилию")
-        surname = input()
-        data = dict({'Name' : name, 'SName': surname})
+        api_key = input()
+        data = dict({'ApiKey' : api_key})
         json.dump(data, write_file)
 ## Файл данных
 name = data.get('Name')
@@ -61,6 +58,7 @@ while True:
             elif text == "Очисти логи":
                 os.system('cls')     
             elif text == "Какой сегодня день":
+                print("Формат вывода даты: год, месяц, день")
                 current_datetime = datetime.now().date()
                 current_datetime_str = str(current_datetime)
                 tts = gTTS(current_datetime_str, lang='ru')
@@ -95,4 +93,3 @@ if os.path.exists('StatusOk.mp3'):
     os.remove('StatusOk.mp3')
 if os.path.exists('StatusNO.mp3'):
     os.remove('StatusNO.mp3')
-
