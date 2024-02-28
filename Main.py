@@ -1,7 +1,7 @@
 import speech_recognition as sr
 import keyboard
 import os
-import json ##Импортируемые библиотеки
+import json 
 import webbrowser
 import datetime
 import requests
@@ -10,14 +10,10 @@ from gtts import gTTS
 from pydub.playback import play
 from pydub import AudioSegment
 from datetime import datetime
+##Импортируемые библиотеки
 
 r = sr.Recognizer() ## Подключение обработчика
 mic = sr.Microphone() ## Подключение микрофона
-
-openai.api_key = "" # Ввод ключа OpenAI
-model_engine = "text-davinci-003"
-max_tokens = 128
-
 sr.LANGUAGE = 'ru-RU' ## Язык обработки
 
 if os.path.exists('data.json'):
@@ -30,7 +26,12 @@ else:
         data = dict({'ApiKey' : api_key})
         json.dump(data, write_file)
 ## Файл данных
-name = data.get('Name')
+        
+openai.api_key = data['ApiKey'] 
+model_engine = "text-davinci-003"
+max_tokens = 128
+# Ввод ключа OpenAI
+
 tts = gTTS("Я приветствую вас, чем я могу вам помочь", lang='ru')
 tts.save('hello.mp3')
 HelloA = AudioSegment.from_mp3('hello.mp3')
