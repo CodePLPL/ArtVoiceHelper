@@ -32,7 +32,7 @@ print("\033[33m" + "To run the program, you must have python installed; if you h
 print("Вы можете поддержать проект криптой BTC:1CVLhwWgHxoEciQTjZsxTQh6yd92PAmpjp, ETH:0x883909cdBD6A9B6f6CDBfa9118A45E41c3b06fBc;\nYou can support the project with crypto: BTC:1CVLhwWgHxoEciQTjZsxTQh6yd92PAmpjp, ETH:0x883909cdBD6A9B6f6CDBfa9118A45E41c3b06fBc")
 print("__________________________________________")
 
-print("\033[31m" + "Для обычного вызова нажмите 'left alt', для ии вызова нажмите 'left ctrl', чтобы выйти из программы скажите 'остановка' или нажмите 'Esc';\nFor a normal call, press 'left alt', for a normal call, press 'left ctrl', to exit the program, say 'stop' or press 'Esc'" + "\033[0m")
+print("\033[31m" + "Для обычного вызова нажмите 'left alt', для ии вызова нажмите 'left ctrl', чтобы выйти из программы скажите 'остановка' или нажмите 'Esc';\nFor a normal call, press 'left alt', for a normal call, press 'left ctrl', to exit the program press 'Esc'" + "\033[0m")
 
 if os.path.exists('data.json'):
     with open("data.json", "r") as read_file:
@@ -107,6 +107,7 @@ while True:
                 messages=[{"role": "user", "content": text}],
                 stream=True,
             )
+            print("<</")
             for chunk in stream:
                 if chunk.choices[0].delta.content is not None:
                     print(chunk.choices[0].delta.content, end="")
