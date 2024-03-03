@@ -99,19 +99,22 @@ while True:
                 audio = r.listen(source)
             text = r.recognize_google(audio, language='ru-RU')
             print(text)
-            
-            client = OpenAI(api_key = data['ApiKey'])
+            try:    
+                client = OpenAI(api_key = data['ApiKey'])
 
-            stream = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[{"role": "user", "content": text}],
-                stream=True,
-            )
-            print("<</")
-            for chunk in stream:
-                if chunk.choices[0].delta.content is not None:
-                    print(chunk.choices[0].delta.content, end="")
-            print("/>>")  
+                stream = client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "user", "content": text}],
+                    stream=True,
+                )
+                print("<</")
+                for chunk in stream:
+                    if chunk.choices[0].delta.content is not None:
+                        print(chunk.choices[0].delta.content, end="")
+                print("/>>")
+            except:
+                play(RecEr)
+                print("К сожалению возникла проблема с api OpenAi, попробуйте другой ключ, проверте доступность серверов OpenAi и повторите попытку")   
         elif keyboard.is_pressed('esc'):
             break            
         else:
