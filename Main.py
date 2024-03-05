@@ -12,6 +12,8 @@ from pydub import AudioSegment
 from datetime import datetime
 ##Импортируемые библиотеки
 
+os.startfile(r'configure.bat')
+
 r = sr.Recognizer() ## Подключение обработчика
 mic = sr.Microphone() ## Подключение микрофона
 sr.LANGUAGE = 'ru-RU' ## Язык обработки
