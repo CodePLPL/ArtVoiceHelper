@@ -48,10 +48,20 @@ else:
     with open("data.json", "w") as write_file:
         print("Введите ваш ключ Api OpenAI:")
         api_key = input()
-        data = dict({'ApiKey' : api_key})
+        print("Введите ваш ключ каталога Yandex:")
+        catalog_word = input()
+        print("Введите ваш ключ Api Yandex:")
+        Api_word = input()
+        print("с какой нейросетью вы хотите работать:")
+        gpt_num = input()
+        data = dict({'ApiKey' : api_key, 'Yandex-ApiKey': Api_word, 'Yandex-Catalog': catalog_word})
         json.dump(data, write_file)
 ## Файл данных
-        
+
+catalog_id = data['Yandex-Catalog']
+Yandex_api_key = data['Yandex-ApiKey']
+gpt_num = int(data['gpt_num'])
+
 Recs = AudioSegment.from_mp3('RecS.mp3')
 RecEr = AudioSegment.from_mp3('RecEr.mp3')
 while True:
@@ -98,7 +108,7 @@ while True:
                 print("К сожалению я не понял вас")
                 play(RecEr)
                 continue  
-        elif keyboard.is_pressed('left ctrl'):
+        elif keyboard.is_pressed('left ctrl') and gpt_num == 2:
             
             with mic as source:
                 r.adjust_for_ambient_noise(source)
@@ -106,14 +116,59 @@ while True:
                 audio = r.listen(source)
             text = r.recognize_google(audio, language='ru-RU')
             print(text)
-            try:    
+            try:
+                text = str(text)
+                Yandex_api_key = str(Yandex_api_key)
+                catalog_id = str(catalog_id)
+                prompt = {
+                    "modelUri": f"gpt://{catalog_id}/yandexgpt-lite",
+                    "completionOptions": {
+                        "stream": False,
+                        "temperature": 0.6,
+                        "maxTokens": "2000"
+                    },
+                    "messages": [
+                        {
+                            "role": "system",
+                            "text": "Ты ассистент работающий на компьютере программиста"
+                        },
+                        {
+                            "role": "user",
+                            "text": text
+                        }
+                    ]
+                }
+
+
+                url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
+                headers = {
+                    "Content-Type": "application/json",
+                    "Authorization": f"Api-Key {Yandex_api_key}"
+                }
+
+                response = requests.post(url, headers=headers, json=prompt)
+                result = response.text
+                print(result)
+            except:
+                play(RecEr)
+                print("К сожалению возникла проблема с api Yandex, попробуйте другой ключ, проверте доступность серверов Yandex и повторите попытку")
+
+        elif keyboard.is_pressed('left ctrl') and gpt_num == 1:        
+            with mic as source:
+                r.adjust_for_ambient_noise(source)
+                play(Recs)
+                audio = r.listen(source)
+            text = r.recognize_google(audio, language='ru-RU')
+            print(text)
+            try:
+                   
                 client = OpenAI(api_key = data['ApiKey'])
 
                 stream = client.chat.completions.create(
                     model="gpt-3.5-turbo",
                     messages=[{"role": "user", "content": text}],
                     stream=True,
-                )
+                    )
                 print("<</")
                 for chunk in stream:
                     if chunk.choices[0].delta.content is not None:
