@@ -12,7 +12,12 @@ from pydub import AudioSegment
 from datetime import datetime
 ##Импортируемые библиотеки
 
-os.startfile(r'configure.bat')
+if os.path.exists('checktoken.txt'):
+    pass
+else:
+    os.startfile(r'configure.bat')
+    with open("checktoken.txt", "w") as write_file:
+        write_file.write("Checking is complete")
 
 r = sr.Recognizer() ## Подключение обработчика
 mic = sr.Microphone() ## Подключение микрофона
