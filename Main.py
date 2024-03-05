@@ -52,7 +52,7 @@ else:
         catalog_word = input()
         print("Введите ваш ключ Api Yandex:")
         Api_word = input()
-        print("с какой нейросетью вы хотите работать:")
+        print("с какой нейросетью вы хотите работать: 1 - gpt-3.5-turbo, 2 - yandex_gpt")
         gpt_num = input()
         data = dict({'ApiKey' : api_key, 'Yandex-ApiKey': Api_word, 'Yandex-Catalog': catalog_word})
         json.dump(data, write_file)
