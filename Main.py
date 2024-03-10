@@ -83,11 +83,17 @@ while True:
                 webbrowser.open("https://www.youtube.com/")
             elif text == "открой github":
                 webbrowser.open("https://github.com/")
+            elif text == "Включи музыку":
+                webbrowser.open("https://music.yandex.ru/home")
+            elif text == "Открой переводчик":
+                webbrowser.open("https://translate.google.com/?hl=ru")
+            elif text == "Открой почту":
+                webbrowser.open("https://mail.google.com")
             elif text == "Очисти логи":
                 os.system('cls')     
             elif text == "Какой сегодня день":
-                print("Формат вывода даты: год, месяц, день")
-                current_datetime = datetime.now().date()
+                print("Формат вывода даты: день, месяц, год")
+                current_datetime = datetime.now().date().strftime("%d, %m, %Y")
                 current_datetime_str = str(current_datetime)
                 tts = gTTS(current_datetime_str, lang='ru')
                 tts.save('datetime.mp3')
