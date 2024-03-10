@@ -6,3 +6,6 @@ This is my school project. I tried to show my programming abilities in it. Besid
 To run the program, you must have python installed; if you have problems with the program, you may have caught a bug. If you have problems working with AI, then most likely the OpenAi servers are not available
 Вы можете поддержать проект криптой BTC:1CVLhwWgHxoEciQTjZsxTQh6yd92PAmpjp, ETH:0x883909cdBD6A9B6f6CDBfa9118A45E41c3b06fBc;
 You can support the project with crypto: BTC:1CVLhwWgHxoEciQTjZsxTQh6yd92PAmpjp, ETH:0x883909cdBD6A9B6f6CDBfa9118A45E41c3b06fBc
+
+
+Чтобы запустить программу нажмите 2 раза на Art.bat
