@@ -85,7 +85,7 @@ while True:
                 webbrowser.open("https://github.com/")
             elif text == "Включи музыку":
                 webbrowser.open("https://music.yandex.ru/home")
-            elif text == "Открой переводчик":
+            elif text == "открой переводчик":
                 webbrowser.open("https://translate.google.com/?hl=ru")
             elif text == "Открой почту":
                 webbrowser.open("https://mail.google.com")
