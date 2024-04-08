@@ -5,6 +5,7 @@ import json
 import webbrowser
 import datetime
 import requests
+import screen_brightness_control as sbc # type: ignore
 from openai import OpenAI
 from gtts import gTTS
 from pydub.playback import play
@@ -57,7 +58,6 @@ else:
         data = dict({'ApiKey' : api_key, 'Yandex-ApiKey': Api_word, 'Yandex-Catalog': catalog_word})
         json.dump(data, write_file)
 ## Файл данных
-
 catalog_id = data['Yandex-Catalog']
 Yandex_api_key = data['Yandex-ApiKey']
 gpt_num = int(data['gpt_num'])
@@ -90,7 +90,22 @@ while True:
             elif text == "Открой почту":
                 webbrowser.open("https://mail.google.com")
             elif text == "Очисти логи":
-                os.system('cls')     
+                os.system('cls')
+            elif "яркость" in text:
+                length = len(text)
+                integers = []
+                i = 0
+                while i < length:
+                    s_int = ''
+                    while i < length and '0' <= text[i] <= '9':
+                        s_int += text[i]
+                        i += 1
+                    i += 1
+                    if s_int != '':
+                        integers.append(float(s_int))
+                i = 0
+                print(s_int)
+                sbc.set_brightness(s_int)
             elif text == "Какой сегодня день":
                 print("Формат вывода даты: день, месяц, год")
                 current_datetime = datetime.now().date().strftime("%d, %m, %Y")
