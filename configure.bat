@@ -5,3 +5,5 @@ pip install requests
 pip install openai
 pip install gtts
 pip install pydub
+pip install screen_brightness_control
+pip install keyboard
